@@ -1,0 +1,35 @@
+###Regsiter user
+POST http://localhost:5000/api/user/register
+Content-Type: application/json
+
+{
+    "email":"a@b.com",
+    "password":"123456"
+}
+
+###Login User
+POST http://localhost:5000/api/user/login
+Content-Type: application/json
+
+{
+    "email":"techguyinfo@gmail.com",
+    "password":"123456"
+}
+
+### Get list of transactions
+GET http://localhost:5000/api/transactions
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQxNzY2ZmJhMTI5N2MwYjNlNTI4NzQiLCJpYXQiOjE2MzE2ODI4NzMsImV4cCI6MTYzMTY4NjQ3M30.T6GQB5xr1Hse-gYVFU1UKEGIJtA31Sx1oHXGrHAeo1Y
+
+###Create Transaction
+POST http://localhost:5000/api/transactions
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQxNzZjOTdlYTlmZTQyYmIxZmRkOGUiLCJpYXQiOjE2MzE2ODI3OTIsImV4cCI6MTYzMTY4NjM5Mn0.dZ8MJL1MlYIOBXp1cv582wcqKByCyz--vCkm5KVjQNE
+Content-Type: application/json
+
+{
+    "text":"Crypto",
+    "amount":100
+}
+
+###Delete Transaction
+DELETE http://localhost:5000/api/transactions/614180d76bace43754c437a7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQxNzY2ZmJhMTI5N2MwYjNlNTI4NzQiLCJpYXQiOjE2MzE2ODI4NzMsImV4cCI6MTYzMTY4NjQ3M30.T6GQB5xr1Hse-gYVFU1UKEGIJtA31Sx1oHXGrHAeo1Y
