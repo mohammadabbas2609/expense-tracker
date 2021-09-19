@@ -4,18 +4,11 @@ import { TransactionContext } from "../context/TransactionContext";
 const AddTransaction = () => {
   const [amount, setAmount] = useState(0);
   const [text, setText] = useState("");
-  const { dispatch } = useContext(TransactionContext);
+  const { addTransaction } = useContext(TransactionContext);
 
   const onSubmit = e => {
     e.preventDefault();
-
-    dispatch({
-      type: "ADD_TRANSACTION",
-      payload: {
-        text,
-        amount: +amount,
-      },
-    });
+    addTransaction(text, amount);
 
     setText("");
     setAmount(0);

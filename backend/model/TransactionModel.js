@@ -5,7 +5,6 @@ const TransactionSchema = new mongoose.Schema(
     text: {
       type: String,
       required: [true, "Please enter text of transaction"],
-      unique: true,
     },
     amount: {
       type: Number,

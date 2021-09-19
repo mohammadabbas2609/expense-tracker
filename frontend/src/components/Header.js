@@ -1,12 +1,17 @@
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import { TransactionContext } from "../context/TransactionContext";
 
 const Header = () => {
   const { state, dispatch } = useContext(AuthContext);
+  const { dispatch: tranDispatch } = useContext(TransactionContext);
 
   const handleLogout = () => {
     dispatch({
       type: "USER_LOGOUT",
+    });
+    tranDispatch({
+      type: "MAKE_TRANSACTION_NULL",
     });
   };
 

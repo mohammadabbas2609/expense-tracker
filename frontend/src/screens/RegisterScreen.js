@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-const LoginScreen = () => {
+const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { userLogin, state } = useContext(AuthContext);
+  const { userRegister, state } = useContext(AuthContext);
   const { user, error } = state;
 
   const history = useHistory();
@@ -18,12 +18,12 @@ const LoginScreen = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    userLogin(email, password);
+    userRegister(email, password);
   };
 
   return (
     <div className="container auth">
-      <h3>Login</h3>
+      <h3>Register</h3>
       <h5>{error && error}</h5>
       <form onSubmit={handleSubmit}>
         <div className="form-controller">
@@ -49,14 +49,14 @@ const LoginScreen = () => {
           />
         </div>
         <button type="submit" className="btn">
-          Login
+          Register
         </button>
       </form>
       <h5>
-        Dont have an account <Link to="/register">Register</Link>
+        Already have an account <Link to="/login">Login</Link>
       </h5>
     </div>
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;

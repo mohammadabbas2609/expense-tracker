@@ -46,8 +46,41 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const userRegister = async (email, password) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/user/register",
+        {
+          email,
+          password,
+        }
+      );
+
+      dispatch({
+        type: "USER_LOGIN",
+        payload: {
+          user: data.email,
+          token: data.token,
+        },
+      });
+
+      localStorage.setItem("__EXPENSE_USER", JSON.stringify(data.email));
+      localStorage.setItem("__EXPENSE_USER_TOKEN", JSON.stringify(data.token));
+    } catch (error) {
+      dispatch({
+        type: "USER_LOGIN",
+        payload: {
+          user: null,
+          loading: false,
+          token: null,
+          error: error.response.data.message,
+        },
+      });
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ dispatch, state, userLogin }}>
+    <AuthContext.Provider value={{ dispatch, state, userLogin, userRegister }}>
       {children}
     </AuthContext.Provider>
   );

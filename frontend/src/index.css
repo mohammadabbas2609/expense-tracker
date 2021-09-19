@@ -68,6 +68,11 @@ header .btn {
   font-weight: bold;
   color: #000;
   margin-left: 0.3rem;
+  transition: scale 0.5s;
+}
+
+header .btn:hover {
+  transform: scale(0.95);
 }
 
 .login-user {
@@ -188,6 +193,10 @@ header .btn {
   border: 1px solid var(--primary-color);
 }
 
+.auth input {
+  width: 100%;
+}
+
 @media (max-width: 970px) {
   .charts div {
     width: 90%;
@@ -209,6 +218,22 @@ header .btn {
 }
 
 @media (max-width: 570px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  header .login-user {
+    margin-top: 0.5rem;
+  }
+
+  header .btn {
+    padding: 0.1rem;
+    font-size: 0.7rem;
+  }
+
   .container {
     max-width: 360px;
   }

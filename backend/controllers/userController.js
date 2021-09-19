@@ -7,6 +7,12 @@ const bcrypt = require("bcryptjs");
 //@route    POST /api/user/register
 //@access   Public
 const registerUser = asyncHandler(async (req, res, next) => {
+  const alreadyThere = await UserModel.findOne({ email: req.body.email });
+  if (alreadyThere) {
+    return res.status(403).json({
+      message: "User with this email already present try logging in",
+    });
+  }
   const user = await UserModel.create(req.body);
 
   const token = generateToken(user._id);

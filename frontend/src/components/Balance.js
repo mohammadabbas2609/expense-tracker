@@ -11,10 +11,16 @@ const Balance = () => {
     }, 0)
     .toFixed(2);
 
+  function sign() {
+    return balance >= 0 ? "+" : "-";
+  }
+
   return (
     <>
       <h4>Your Balance</h4>
-      <h1>${balance}</h1>
+      <h1>
+        {sign()}${Math.abs(balance)}
+      </h1>
     </>
   );
 };

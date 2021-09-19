@@ -8,8 +8,6 @@ const AuthReducer = (state, action) => {
         token: action.payload.token,
         error: action.payload.error,
       };
-    case "USER_REGISTER":
-      return state;
     case "USER_LOGOUT":
       localStorage.setItem("__EXPENSE_USER", null);
       localStorage.setItem("__EXPENSE_USER_TOKEN", null);

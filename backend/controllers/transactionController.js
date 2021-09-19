@@ -5,7 +5,9 @@ const TransactionModel = require("../model/TransactionModel");
 //@route    GET /api/transactions
 //@access   Private
 const getTransactions = asyncHandler(async (req, res, next) => {
-  const transaction = await TransactionModel.find({ user: req.user });
+  const transaction = await TransactionModel.find({ user: req.user }).select(
+    "text amount"
+  );
 
   res.status(200).json({
     transaction,
@@ -33,11 +35,11 @@ const deleteTransaction = asyncHandler(async (req, res, next) => {
   try {
     await TransactionModel.findByIdAndDelete(req.params.id);
     res.status(200).json({
-      transaction: "deleted",
+      transaction: req.params.id,
     });
   } catch {
     res.status(400).json({
-      error: "transaction not found",
+      message: "transaction not found",
     });
   }
 });

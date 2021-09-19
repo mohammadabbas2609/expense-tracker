@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import AuthContext from "../context/AuthContext";
 import { TransactionContext } from "../context/TransactionContext";
 import { PieChart } from "react-minimal-pie-chart";
 import Transaction from "./Transaction";
@@ -10,7 +11,15 @@ const generateRandomColor = () => {
 };
 
 const TransactionList = () => {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions, getTransactions } = useContext(TransactionContext);
+  const { state } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (state.token !== null) {
+      getTransactions();
+    }
+    // eslint-disable-next-line
+  }, [state]);
 
   const getPieChartData = data => {
     if (data === "income") {
@@ -40,39 +49,44 @@ const TransactionList = () => {
 
   return (
     <div className="history">
-      <h4>Transaction History</h4>
-      <div className="tracking-history">
-        <ul className="list">
-          {transactions &&
-            transactions.map(transaction => (
-              <Transaction transaction={transaction} key={transaction.id} />
-            ))}
-        </ul>
-        <div className="charts">
-          <div className="income">
-            <h4>Income</h4>
-            <PieChart
-              data={getPieChartData("income")}
-              label={({ dataEntry }) => {
-                return `${dataEntry.title}`;
-              }}
-              labelStyle={{ fontSize: "5px", fill: "white" }}
-              animate={true}
-            />
+      {transactions.length > 0 ? (
+        <>
+          <h4>Transaction History</h4>
+          <div className="tracking-history">
+            <ul className="list">
+              {transactions.map(transaction => (
+                <Transaction transaction={transaction} key={transaction._id} />
+              ))}
+            </ul>
+            <div className="charts">
+              <div className="income">
+                <h4>Income</h4>
+                <PieChart
+                  data={getPieChartData("income")}
+                  label={({ dataEntry }) => {
+                    return `${dataEntry.title}`;
+                  }}
+                  labelStyle={{ fontSize: "5px", fill: "white" }}
+                  animate={true}
+                />
+              </div>
+              <div className="expense">
+                <h4>Expense</h4>
+                <PieChart
+                  data={getPieChartData("expense")}
+                  label={({ dataEntry }) => {
+                    return `${dataEntry.title}`;
+                  }}
+                  labelStyle={{ fontSize: "5px", fill: "white" }}
+                  animate={true}
+                />
+              </div>
+            </div>
           </div>
-          <div className="expense">
-            <h4>Expense</h4>
-            <PieChart
-              data={getPieChartData("expense")}
-              label={({ dataEntry }) => {
-                return `${dataEntry.title}`;
-              }}
-              labelStyle={{ fontSize: "5px", fill: "white" }}
-              animate={true}
-            />
-          </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        <h5>No transactions Added .</h5>
+      )}
     </div>
   );
 };
