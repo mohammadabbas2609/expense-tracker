@@ -9,6 +9,8 @@ const initialState = {
 // Create Context
 export const TransactionContext = createContext(initialState);
 
+const URL = "https://expense-tracker-backend2609.herokuapp.com";
+
 // Provider
 export const TransactionProvider = ({ children }) => {
   const [state, dispatch] = useReducer(TransactionReducer, initialState);
@@ -21,7 +23,7 @@ export const TransactionProvider = ({ children }) => {
     };
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/transactions",
+        `${URL}/api/transactions`,
         { text, amount },
         config
       );
@@ -51,10 +53,7 @@ export const TransactionProvider = ({ children }) => {
       },
     };
     try {
-      const { data } = await axios.get(
-        "http://localhost:5000/api/transactions",
-        config
-      );
+      const { data } = await axios.get(`${URL}/api/transactions`, config);
 
       dispatch({
         type: "GET_TRANSACTIONS",
@@ -70,7 +69,6 @@ export const TransactionProvider = ({ children }) => {
   };
 
   const removeTransaction = async id => {
-    console.log(id);
     const config = {
       headers: {
         Authorization: JSON.parse(localStorage.getItem("__EXPENSE_USER_TOKEN")),
@@ -79,7 +77,7 @@ export const TransactionProvider = ({ children }) => {
 
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/transactions/${id}`,
+        `${URL}/api/transactions/${id}`,
         config
       );
 

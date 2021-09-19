@@ -8,6 +8,8 @@ const initialState = {
   loading: true,
 };
 
+const URL = "https://expense-tracker-backend2609.herokuapp.com";
+
 const AuthContext = createContext(initialState);
 
 export const AuthProvider = ({ children }) => {
@@ -15,13 +17,10 @@ export const AuthProvider = ({ children }) => {
 
   const userLogin = async (email, password) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/user/login",
-        {
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post(`${URL}/api/user/login`, {
+        email,
+        password,
+      });
 
       dispatch({
         type: "USER_LOGIN",
@@ -48,13 +47,10 @@ export const AuthProvider = ({ children }) => {
 
   const userRegister = async (email, password) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/user/register",
-        {
-          email,
-          password,
-        }
-      );
+      const { data } = await axios.post(`${URL}/api/user/register`, {
+        email,
+        password,
+      });
 
       dispatch({
         type: "USER_LOGIN",
