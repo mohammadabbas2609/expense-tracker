@@ -8,7 +8,7 @@ const userRoute = require("./routes/userRoutes");
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://track-your-expenses2609.netlify.app",
   })
 );
 app.use(express.json());
